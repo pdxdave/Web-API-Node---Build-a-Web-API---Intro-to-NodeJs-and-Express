@@ -18,3 +18,16 @@ single-threaded: can’t take advantage of servers with multiple cores/processor
 - Asynchronous: it is harder to learn for developers that have only worked with languages that default to synchronous operations that block the execution thread.    
 - npm repository: too many packages that do the same thing makes it harder to choose one and, in some cases, may introduce vulnerabilities into our code.    
 
+
+#### Q: What is Express?
+#### A: Express is a light and unopinionated framework that sits on top of Node.js and makes it easier to create web applications and services. 
+
+Some of the benefits of using Express are that it is:    
+
+- Simple    
+- Unopinionated    
+- Extensible    
+- Light-weight    
+- Compatible with connect middleware. (This means we can tap into an extensive collection of modules written for connect.)    
+- All packaged into a clean, intuitive, and easy to use API.    
+- Abstracts away common tasks (writing web applications can be verbose, hence the need for a library like this)    

@@ -39,6 +39,73 @@ Some of the benefits of using Express are that it is:
    You can make the entry point "server.js" w/o quotes.    
 2. Now install express ```npm install express```    
 
+```
+// Bring in express
+const express = require("express")
+// Bring in database
+let db = require('./database')
+
+// Create an instance of express
+const app = express();
+
+// middleware
+app.use(express.json())
+
+
+// create a route
+app.get("/", (req, res) => {
+    res.send("This is live")
+})
+
+app.get("/lambda", (req, res) => {
+    res.redirect("https:/lambdaschool.com")
+})
+
+app.get("/users", (req, res) => {
+    res.json(db)
+})
+
+app.get("/users/:id", (req, res) => {
+    const user = db.find(row => row.id === req.params.id)
+
+    if(user){
+        res.json(user)
+    } else {
+        res.status(404).json({ error: "User not found" })
+    }
+})
+
+app.post("/users", (req, res) => {
+    if(!req.body.name){
+        return res.status(400).json({ error: "need a user name"})
+    }
+    const newUser = {
+        id: String(db.length + 1),
+        name: req.body.name
+    }
+    db.push(newUser)
+    res.status(201).json(newUser)
+})
+
+app.delete("/users/:id", (req, res) => {
+    const user = db.find(row => row.id === req.params.id)
+
+    if(user){
+        db = db.filter(row => row.id !== req.params.id)
+        res.json(user)
+    } else {
+        res.status(404).json({ error: "User not found" })
+    }
+})
+
+// Set the listening port
+const PORT = 5000
+
+// Listen for the port
+app.listen(PORT, () => {
+    console.log(`console is running on port ${PORT}`)
+})
+```
 
 
 

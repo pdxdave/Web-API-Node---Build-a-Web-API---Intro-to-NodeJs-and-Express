@@ -13,8 +13,8 @@ Some of the advantages of using Node.js for writing server side code are:
 
 Some of the disadvantages of using Node.js for writing server-side code are:    
 
-JavaScript on the server: we lose the ability to use the right tool (language) for the job.    
+- JavaScript on the server: we lose the ability to use the right tool (language) for the job.    
 single-threaded: can’t take advantage of servers with multiple cores/processors.    
-asynchronous: it is harder to learn for developers that have only worked with languages that default to synchronous operations that block the execution thread.    
-npm repository: too many packages that do the same thing makes it harder to choose one and, in some cases, may introduce vulnerabilities into our code.    
+- Asynchronous: it is harder to learn for developers that have only worked with languages that default to synchronous operations that block the execution thread.    
+- npm repository: too many packages that do the same thing makes it harder to choose one and, in some cases, may introduce vulnerabilities into our code.    
 

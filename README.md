@@ -31,3 +31,14 @@ Some of the benefits of using Express are that it is:
 - Compatible with connect middleware. (This means we can tap into an extensive collection of modules written for connect.)    
 - All packaged into a clean, intuitive, and easy to use API.    
 - Abstracts away common tasks (writing web applications can be verbose, hence the need for a library like this)    
+
+
+### Working with Express
+
+1. At the terminal ```npm init```   This will create a package.json.
+2. Now install express ```npm install express```    
+
+
+
+
+

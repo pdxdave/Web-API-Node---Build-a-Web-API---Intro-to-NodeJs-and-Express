@@ -35,9 +35,9 @@ Some of the benefits of using Express are that it is:
 
 ### Working with Express
 
-1. At the terminal ```npm init```   This will create a package.json.
+1. At the terminal ```npm init```   This will create a package.json.  A list of questions will come up.
+   You can make the entry point "server.js" w/o quotes.    
 2. Now install express ```npm install express```    
-
 
 
 

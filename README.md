@@ -38,6 +38,7 @@ Some of the benefits of using Express are that it is:
 1. At the terminal ```npm init```   This will create a package.json.  A list of questions will come up.
    You can make the entry point "server.js" w/o quotes.    
 2. Now install express ```npm install express```    
+3. This is without routers, modules, etc
 
 ```
 // Bring in express
@@ -104,6 +105,112 @@ const PORT = 5000
 // Listen for the port
 app.listen(PORT, () => {
     console.log(`console is running on port ${PORT}`)
+})
+```
+
+#### This is using routers, modules, knex, ect
+```
+// https://www.youtube.com/watch?v=2poEnenm9pE&feature=youtu.be
+
+// bring in express
+const express = require('express');
+
+// bring in db
+const db = require('./data/hubs-model.js')
+
+// create server
+const server = express();
+
+// middleware - body parser
+server.use(express.json())
+
+// request handler
+server.get("/", (req, res) => {
+    res.send('Hi there')
+})
+
+// request date
+server.get("/now", (req, res) => {
+    const date = new Date().toISOString();
+    res.send(date)
+})
+
+// Get /hubs
+server.get('/hubs', (req, res) => {
+    db.find()
+    .then(hubs => {
+        res.json(hubs)
+    })
+    .catch(err => {
+        res.status(500).json({ err: err})
+    })
+})
+
+// Post /
+server.post('/hubs', (req, res) => {
+    const newHub = req.body;
+    db.add(newHub)
+    .then(hub => {
+        res.status(201).json(hub)
+    })
+    .catch(err => {
+        res.status(500).json({
+            err: err,
+            message: 'failed to create new hub'
+        })
+    })
+})
+
+
+// Delete /hubs/:id
+server.delete('/hubs/:id', (req, res) => {
+    const {id} = req.params;
+
+    db.remove(id)
+    .then(deletedHub => {
+        if(deletedHub){
+            res.json(deletedHub)
+        }else{
+            res.status(404).json({
+                message: 'invalid hub id'
+            })
+        }
+    })
+    .catch(err => {
+        res.status(500).json({
+            err: err,
+            message: 'failed to delete hub'
+        })
+    })
+})
+
+// Put /hubs/:id
+
+server.put('/hubs/:id', (req, res) => {
+    const {id} = req.params;
+    const changes = req.body 
+
+    db.update(id, changes)
+    .then(updated => {
+        if(updated){
+            res.json(updated)
+        } else {
+            res.status(404).json({
+                message: 'invalid hub id'
+            })
+        }
+    })
+    .catch(err => {
+        res.status(500).json({
+            err: err,
+            message: 'failed to update hub'
+        })
+    })
+})
+
+// listen for server and give it a port
+server.listen(4000, () => {
+    console.log('Server is running on port 4000...')
 })
 ```
 

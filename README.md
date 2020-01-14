@@ -208,6 +208,30 @@ server.put('/hubs/:id', (req, res) => {
     })
 })
 
+// Get by Id /hubs/:id
+server.get('/hubs/:id', (req, res) => {
+    const {id} = req.params;
+
+    db.findById(id)
+    .then(hub => {
+        if(hub){
+            res.json(hub)
+        } else {
+            res.status(404).json({
+                message: 'invalid hub id'
+            })
+        }
+    })
+    .catch(err => {
+        res.status(500).json({
+            err: err,
+            message: 'failed to update hub'
+        })
+    })
+})
+
+
+
 // listen for server and give it a port
 server.listen(4000, () => {
     console.log('Server is running on port 4000...')
